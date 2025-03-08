@@ -1,0 +1,1300 @@
+@charset "utf-8";
+
+/**
+ * Author : Kannami
+ * @media concept : mobile first CSS
+ * version : Github, kannami-green/my-first-html
+ */
+
+
+
+
+
+
+
+
+
+
+/* ================================================================================================== *
+ *
+ * CSS description rules 
+ *
+ * ================================================================================================== */
+/**
+ * margin, padding
+ * 1. margin: 2px;              all
+ * 2. margin: 2px 3px;          up/down, side
+ * 3. margin: 2px 3px 4px;      up, side, down
+ * 4. margin: 2px 3px 4px 5px;  up, right, down, left
+ */
+
+
+
+
+
+
+
+
+
+
+/* ================================================================================================== *
+ *
+ * Custom Properties (CSS変数)
+ *
+ * ================================================================================================== */
+:root {
+
+/* site-color
+ * Reference Site : https://www.zotero.org/
+ */
+    
+    /*main*/
+    --base-color: #edeae6;  /*rgb(237, 234, 230)*/
+    --main-color: #3f7e7b;  /*rgb(63, 126, 123)*/
+    --accent-color: #d63340;  /*rgb(214, 51, 64)*/
+    --sub-accent-color: #2c3038;  /*rgb(44, 48, 56)*/
+    --other-color: #c69f73;  /*rgb(198, 159, 115)*/
+    --background-color: #f6f6f6;  /*rgb(246, 246, 246)*/
+
+
+    /*preparation*/
+    --base-next-color: #eaedf2;  /*rgb(234, 237, 242)*/
+    --accent-next-color: #0073f4;  /*rgb(0, 115, 244)*/
+
+
+/* size
+ */
+    --maxwidth: 1170px;
+}
+
+
+
+
+
+
+
+
+
+
+/* ================================================================================================== *
+ *
+ * Basic elements (main type selector)
+ *
+ * ================================================================================================== */
+html {
+    font-size: 15px;
+}
+
+
+body {    
+    font-family: "Noto Sans JP", "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: rgb(51, 51, 51);   /*text color*/
+    line-height: 1.6;   /*行の高さを指定*/
+    background: var(--base-color);
+}
+
+
+/*PC表示の場合はフォントサイズを13pxに下げる*/
+@media only screen and (min-width: 768px) {
+    html {
+        font-size: 13px;
+    }
+}
+
+
+/* ================================================================================================== *
+ *
+ * Links
+ *
+ * ================================================================================================== */
+a {
+    color: var(--main-color);
+    /* color: #0073bc; */
+    text-decoration: none;  /*リンクテキストの下線を消す（デフォルトは表示）*/
+}
+
+
+/* 疑似クラス : マウスオーバー時の挙動を定義
+ */
+a:hover {
+    color: #b7dbf2;
+    text-decoration: underline; /*リンクテキストの下線を表示する*/
+}
+
+
+/* 疑似クラス : マウスクリック時の挙動を定義
+ */
+a:active {
+    color: #4ca4e8;
+}
+
+
+/* 疑似要素 : 別タブで開くリンク（HTMLでtarget="_blank"）の後ろにアイコンを表示
+ * 画像リンクにも表示されてしまうため停止中（解決するためにはjavascriptを動かす必要があるため永久停止）
+ */
+/* a[target="_blank"]::after {
+	content: url(../images/opentab.png);
+} */
+
+
+
+
+
+
+
+
+
+
+/* ================================================================================================== *
+ *
+ * Images
+ *
+ * ================================================================================================== */
+
+/* imgに枠線を付ける
+ */
+img {
+    border: 1px solid rgba(0,0,0,0.54);
+}
+
+
+/* imgにホバーしたときに透明度を変更する
+ */
+ a:hover img {
+    opacity: 0.5;   /*0で完全に透明、1で完全に不透明*/
+}
+
+
+/* <img class="img-responsive" ~>とした<img>はwidth, hgiht属性を無視して表示する画像サイズが伸縮されるようにする
+ */
+.img-responsive {
+    display: block; /*要素をブロックボックスとして表示する*/
+    max-width: 100%;
+    height: auto;
+}
+
+
+
+
+
+
+
+
+
+
+/* ================================================================================================== *
+ *
+ * h1, h2, h3, h4, h5, h6
+ *
+ * ================================================================================================== */
+
+/* font-sizeは単位をrem(root-em)とする
+ *  - remは親要素に依存せず、常にhtml{}のfont-sizeからの相対値での管理（ex:13.5px * 2.57rem = 34.7px）
+ * Reference（https://inventwithpython.com/blog/2018/10/22/a-curriculum-for-python-packaging/）
+ *  - html{font-size:14px}, h1{63px(4.5rem@14px)}, h2{36px(2.571rem@14px)}, h3{30px(2.143rem@14px)}, h4{24px(1.714rem@14px)}
+ */
+h1 {
+    font-weight:  normal;
+    font-size: 2.57rem;
+    padding: 20px 0 0;       /*box-border-inside*/
+    margin: 0 auto 0;        /*box-border-outside*/
+    color: rgba(0,0,0,0.54);
+}
+
+
+h2 {
+    font-size: 1.71rem;
+    font-weight: normal;
+    line-height: 1.43;
+    padding: 0 0 1px;       /* 余白指定（up, side, down）これしないと下線が文字にかぶるため */
+    margin: 60px auto 10px;        /*box-border-outside*/
+    color: var(--main-color);
+    border-bottom: solid 1.5px var(--main-color);
+}
+
+
+
+
+
+
+
+
+
+
+/* ================================================================================================== *
+ *
+ * Common Layer1 layout
+ *
+ * ================================================================================================== */
+
+/* none
+ */
+
+
+
+
+
+
+
+
+
+
+/* ================================================================================================== *
+ *
+ * Common Layer2 layout (Content Area)
+ *
+ * ================================================================================================== */
+
+/* クラス名が「container」の要素（Layer2の全要素が持つ）にスタイルを適用する
+ * BOXを親要素（Layer1）の中央に配置するためにmargin左右を"auto"にする
+ */
+.container {
+    padding: 0 16px; /* box-border-inside */
+    margin: 0 auto;  /* box-border-outside */
+    max-width: var(--maxwidth);  /* ページ横幅の上限をmaxwidth(px)とする */
+    /*background: olive;  /* boxレイアウト確認用（公開時コメントアウト） */
+}
+
+
+/* mainエリアのcontentboxはLayer2に「container」を持たない（コンテンツエリアの幅いっぱいにBOXを広げるため）
+ * そのため例外的に.home-main-contentboxに対してLayer2のスタイルを当てる
+ */
+.home-main-contentbox {
+    display: block;
+    padding: 0;         /* box-border-inside */
+    margin: 0 auto;  /* box-border-outside */
+    max-width: var(--maxwidth);  /* ページ横幅の上限をmaxwidth(px)とする */
+}
+
+
+
+
+
+
+
+
+
+
+/* ================================================================================================== *
+ *
+ * Common Layer3 layout (Content)
+ *
+ * ================================================================================================== */
+
+/* header, nav, main, footerの周囲にスペースを設ける
+ * <div class="container">の子要素
+ */
+.header-inner {
+    padding: 10px 10px 10px 10px; /*box-border-inside*/  
+    /*background: darkgray;  /*boxレイアウト確認用（公開時コメントアウト）*/
+}
+
+
+.catchcopy-inner {
+    padding: 10px 10px 10px 10px; /*box-border-inside*/
+    /*background: lightsalmon;  /*boxレイアウト確認用（公開時コメントアウト）*/
+}
+
+
+/*.contentbox-inner {
+    /*padding: 10px 10px 10px 10px; /*box-border-inside*/
+    /*background: lightslategray;  /*boxレイアウト確認用（公開時コメントアウト）*/
+/*}*/
+
+
+main {
+    padding: 20px 10px 20px 10px; /*box-border-inside*/
+    /*background: snow;  /*boxレイアウト確認用（公開時コメントアウト）*/
+}
+
+
+.sidebar {
+    padding: 20px 10px 20px 10px; /*box-border-inside*/
+    /*background: thistle;  /*boxレイアウト確認用（公開時コメントアウト）*/
+}
+
+
+.footer-inner {
+    padding: 20px 16px 10px 16px; /*box-border-inside*/
+    /*background: dimgrey;  /*boxレイアウト確認用（公開時コメントアウト）*/
+}
+
+
+
+
+
+
+
+
+
+
+/* ================================================================================================== *
+ *
+ * [○]header []nav []main []footer
+ * -> Common for all pages
+ *
+ * ================================================================================================== */
+
+/* 背景色をウィンドウ幅いっぱいに広げる
+ * Layer2(.container)はmax-widthで固定されているためLayer1の要素を指定
+ */
+header {
+    background: var(--background-color);
+}
+
+
+.header-inner {
+    /* flexbox : 親要素にdisplay:flexを指定することでflexコンテナとなり、子要素をflexアイテムとして扱える 
+     * <div class="header-inner">をflexコンテナに指定（flexアイテム："header-logo""hamburger"）
+     */
+    display: flex;
+
+
+    /* flexアイテムの水平方向制御：flexアイテムを均等配置（最初のアイテムは先頭に寄せて最後のアイテムは末尾に寄せる）
+     */
+	justify-content: space-between;
+
+
+    /* flexアイテムの垂直方向制御：flexアイテムを上下中央に配置
+     */
+    align-items: center;
+}
+
+
+/* flexアイテムがh1指定されているため、h1のmargin制御が優先されjustify-contentが効かない（logoが常に中央にくる）
+ * これを回避するために<div class="header-inner">の子要素であるh1は例外制御しておく
+ * class="header-inner"が付与されたタグの子要素である全ての<h1>にスタイルを上書きする
+ */
+.header-inner h1 {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* class="header-logo"が付与されたタグの子要素である全ての<img>にスタイルを上書きする
+ */
+.header-logo img {
+    border: none;    /* imgの枠線削除 */
+    width: 280px;    /* ボックスサイズの指定 */
+    height: 60px;    /* ボックスサイズの指定 */
+    object-fit: contain;    /* imgの縦横比を維持したままボックスサイズに収まるように縮小 */
+}
+
+
+.hamburger {
+	border: none;    /* imgの枠線削除 */
+	width: 50px;    /* ボックスサイズの指定 */
+	height: 50px;    /* ボックスサイズの指定 */
+	background: url(../images/hamburger.png) no-repeat;
+	background-size: contain;    /* backgroundの縦横比を維持したままボックスサイズに収まるように縮小 */
+}
+
+
+
+
+
+
+
+
+
+
+/* ================================================================================================== *
+ *
+ * []header [○]nav []main []footer
+ * -> Common for all pages
+ *
+ * ================================================================================================== */
+
+/* 背景色をウィンドウ幅いっぱいに広げる
+ * Layer2(.container)はmax-widthで固定されているためLayer1の要素を指定
+ */
+nav {
+    background: var(--sub-accent-color);
+}
+
+
+.navbar {
+	display: none;  /*mobile first CSSのためデフォルトでナビゲーションバーは非表示*/
+	margin: 0;
+	padding: 0;
+	list-style-type: none;  /*リスト先頭のマーカーを非表示*/
+	/*background: #655046;  /*boxレイアウト確認用（公開時コメントアウト）*/
+}
+
+
+/* class="navbar"が付与されたタグの子要素である<li>の子要素である全ての<a>にスタイルを上書きする
+ */
+.navbar li a {
+	display: block; /*ブロック要素にして幅を親要素の100%とする（クリック領域を広げるためで、navの<a>には必須）*/
+	padding: 10px 8px 10px 8px; /*box-border-inside*/
+	color: #fff;
+    text-decoration: none;    /*リンクテキストの下線を消す（デフォルトは表示）*/
+	transition: color .3s, background .3s, box-shadow .3s, transform 0.3s;  /*https://lopan.jp/css-animation-hover/*/
+}
+
+
+.navbar li a:hover {
+    background: var(--main-color);
+    color: #000;
+/*  background: #fff;
+    color: #565656; */
+}
+
+
+/* Media Queries(@media) mobile first CSS
+ * screen width:768px以上でCSSを上書きする（標準的なタブレットの画面サイズ：768*1024より）
+ * PC表示ではクラス名が「hamburger」の要素を非表示にしてnavbarを右寄せにする
+ */
+@media only screen and (min-width: 768px) {
+    .hamburger {
+		display: none;
+    }
+    
+	.navbar {
+        display: flex !important;   /*詳細度に関係なくCSSを適用（hamburger-script.js動作のため）*/
+        justify-content: flex-end;  /*navbarを右寄せにする*/
+	}
+}
+
+
+
+/* グローバルナビゲーションをドロップダウンメニューにする（2025/02/05追加）
+ */
+
+/* 親メニューの li を relative にする */
+#menu-global-navigation li {
+  position: relative;
+}
+
+/* 子メニュー（ネストされた ul）はデフォルトで非表示、絶対配置でドロップダウン表示 */
+#menu-global-navigation li ul {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;  /* 親メニューの直下に配置 */
+  background: var(--background-color); /* 適宜背景色を設定 */
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 1000;
+}
+
+/* 親メニューにホバーしたとき、子メニューを表示 */
+#menu-global-navigation li:hover > ul {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 子メニュー内の li のスタイル（必要に応じて調整） */
+#menu-global-navigation li ul li {
+  white-space: nowrap; /* テキストの改行を防ぐ */
+  padding: 8px 12px;
+}
+
+
+/* モバイルでは hover が効かないため、親メニュー項目をタップした際に子メニューを展開する方法が必要
+ * たとえば、親メニューの  に「active」クラスが付与されている場合に子メニューを表示するようにする
+ */
+@media only screen and (max-width: 767px) {
+  /* 親メニューの子メニューは、active クラスがなければ非表示 */
+  #menu-global-navigation li > ul {
+    display: none;
+    position: static; /* ドロップダウンでなく、普通のリスト表示に変更 */
+    opacity: 1;
+    transform: none;
+    border: none;
+  }
+  /* active クラスが付いている場合は表示 */
+  #menu-global-navigation li.active > ul {
+    display: block;
+  }
+}
+
+
+/* --- 子メニュー（ドロップダウン）の調整 --- */
+/* 子メニュー内のリンクの色を変更し、ホバー時に背景と文字色を変える */
+#menu-global-navigation li ul li a {
+    background: rgb(51, 51, 51); /* 初期状態の背景色 */
+    color: #fff;  /* 初期状態の文字色 */
+}
+#menu-global-navigation li ul li a:hover {
+    background: var(--main-color); /* ホバー時の背景色 */
+}
+
+/* 子メニュー項目の間隔を狭める */
+#menu-global-navigation li ul li {
+    padding: 0;  /* 上下の余白を狭くする */
+}
+
+/* 子メニューの位置を調整して親メニューの下にぴったり並べる */
+#menu-global-navigation li ul {
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* デフォルト（モバイルファースト）：モバイル用画像を表示、デスクトップ用画像は非表示 */
+.img-desktop {
+  display: none;
+}
+
+.img-mobile {
+  display: block;
+}
+
+
+/* 画面幅が768px以上（PC・タブレット）では、デスクトップ用画像を表示、モバイル用は非表示に */
+@media only screen and (min-width: 768px) {
+  .img-desktop {
+    display: block;
+  }
+  .img-mobile {
+    display: none;
+  }
+}
+
+
+@media only screen and (max-width: 767px) {
+ /* リスト項目の高さを自動に */
+    .home-contentbox li {
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+
+/* モバイル向けにオーバーレイ効果を無効にして常に非表示にする */
+@media only screen and (max-width: 767px) {
+    .tile-cover-animation dl {
+        height: auto !important;
+        opacity: 0 !important;  /* 常に非表示 */
+        transform: none !important;
+    	}
+	}
+}
+
+
+
+
+
+/* ================================================================================================== *
+ *
+ * []header []nav [○]main []footer
+ * -> home（index.html）
+ *
+ * ================================================================================================== */
+
+
+/* ================================================================================================== *
+ * -> home（index.html）
+ * -> -> catchcopy-BOX
+ * ================================================================================================== */
+.home-main-catchcopy {
+    background: var(--background-color);
+    text-align: center;         /* テキストを中央揃え */
+    min-height: 300px;          /* 最低の高さを確保（必要に応じて調整） */
+    
+    /* コンテンツを中央に配置するための Flexbox 設定 */
+    display: flex;
+    align-items: center;        /* 垂直中央揃え */
+    justify-content: center;    /* 水平中央揃え */
+}
+
+/* キャッチコピーの文章の左右幅を狭める */
+.catchcopy-inner {
+    max-width: 700px;   /* 例：最大幅800pxに制限（必要に応じて調整） */
+    margin: 0 auto;     /* 中央揃え */
+}
+
+
+
+
+
+
+
+
+
+
+/* ================================================================================================== *
+ * -> home（index.html）
+ * -> -> contentbox-BOX
+ * ================================================================================================== */
+.home-contentbox {
+	margin: 0;
+	padding: 0;
+    list-style-type: none;  /*リスト先頭のマーカーを非表示*/
+    
+
+    /* flexbox : 親要素にdisplay:flexを指定することでflexコンテナとなり、子要素をflexアイテムとして扱える 
+     * <div class="home-contentbox">をflexコンテナに指定（flexアイテム：<li>*4）
+     */
+    display: flex;
+
+
+    /* デフォルトではflex itemが横並びになるため、縦並びにする
+     */
+    flex-flow: column;
+}
+
+
+/* class="home-contentbox"が付与されたタグの子要素である全ての<li>にスタイルを上書きする
+ */
+.home-contentbox li {
+    display: block; /*幅指定するため*/
+    width: 100%;
+    height: 300px;
+    text-align: center;
+}
+
+
+/* contentbox-BOXのアニメーション制御
+ * Ref：https://lopan.jp/css-animation-hover
+ * Refははじめのliとdlをクラス指定してないがここでは親要素であるul要素をクラス指定した
+ * Refは3種類のアニメーションの共通部と専用部で分けていたが今回は1種類しか使わないのでまとめられるところはまとめている
+ */
+.home-contentbox li {
+    position: relative;
+    overflow: hidden;   /*要素のBOXからはみ出た部分は隠す*/
+}
+
+
+.home-contentbox dl {
+	position: absolute;
+	top: 0;
+	margin: 0;
+	padding: 16px 24px;
+	box-sizing: border-box;
+	color: #fff;
+    background: var(--main-color);
+    transition: opacity .6s, transform .6s cubic-bezier(0.215, 0.61, 0.355, 1);
+
+
+/* Refにないプロパティ
+ * - RefはRGBA指定だが、backgroundにカスタムプロパティを使用したかったため別途opacityを指定
+ * - Refのままだとhoverで被さるdl要素がPC表示で縦切れ、mobile表示で横切れしたためwidthとheightをそれぞれ100%で指定
+ */
+    opacity: 0.9;
+    width: 100%;
+    height: 100%;
+}
+
+
+.tile-cover-animation:not(:hover) dl {
+	opacity: 0;
+	transform: translateY(100%);
+}
+
+
+.tile-cover-animation img {
+    border: none;    /*画像の枠線削除*/
+    width: 100%;    /*ボックスサイズの指定*/
+    object-fit: contain;    /*画像の縦横比を維持したままボックスサイズに収まるように縮小*/
+}
+
+
+.tile-cover-animation li a {
+    display: block; /*navの全体に広げるやつ*/
+}
+
+
+/*画像にホバーしても透明度を変更しない
+ */
+.tile-cover-animation a:hover img {
+    opacity: 1;   /*0で完全に透明、1で完全に不透明*/
+}
+
+
+/*これしないとddリストの左の余白ができて右によってボックス中央に文字が来ない*/
+.tile-cover-animation dd{
+    margin-left:0;
+}
+
+
+
+
+
+
+
+
+
+
+/* ================================================================================================== *
+ * -> home（index.html）
+ * -> -> description-BOX
+ * ================================================================================================== */
+.home-main-description {
+    display: flex;
+    flex-flow: column;
+    background: var(--background-color);
+}
+
+
+@media only screen and (min-width: 768px) {
+    .home-contentbox {
+        flex-flow: row;  /*flex itemを横並びにする*/
+        justify-content: center;
+    }
+    
+    .home-main-description {
+		flex-flow: row;   /*flex itemを横並びにする*/
+    }
+
+	main {
+		flex: 1 1 auto;    /*ウインドウサイズが変わったら拡大・縮小ともに1:0の割合で変化させる*/
+    }
+
+	.sidebar {
+		flex: 0 0 300px;    /*ウインドウサイズが変わってもsidebarの幅は300pxで固定*/
+    }
+}
+
+
+
+/* ================================================================================================== *
+ * -> home（index.html）
+ * -> -> description-BOX：newsBlock
+ * ================================================================================================== */
+
+/* flexbox : 親要素にdisplay:flexを指定することでflex containerとなり、子要素をflex itemとして扱える
+ * class="news-text"とclass="news-figure"をflex itemとして扱う
+ */
+.news {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;    /*flex itemの水平方向制御：左寄せで並べる*/
+    padding: 25px 0 25px 0;
+    border-bottom: 1px dotted var(--sub-accent-color);
+}
+
+
+/*mobile表示ではテキスト->アイキャッチの順番で並べる*/
+.news-figure {
+    order: 2;
+    margin: 0 20px 0 0;
+}
+
+
+.news-text {
+    order: 1;
+}
+
+
+@media only screen and (min-width: 768px) {
+    .news {
+        flex-flow: row;   /*flex itemを横並びにする*/
+    }
+
+    /*PC表示ではアイキャッチ->テキストの順番で並べる*/
+    .news-figure {
+        order: 1;
+    }
+    
+    .news-text {
+        order: 2;
+    }
+}
+
+
+/* flexbox : 親要素にdisplay:flexを指定することでflex containerとなり、子要素をflex itemとして扱える
+ * class="categories"とclass="news-time"をflex itemとして扱う
+ */
+.entryInfo {
+    display: flex;
+    align-items: center;  /* 子要素をflexboxにより中央に配置する */
+}
+
+
+/*調整系*/
+.newsBlock h2 {
+    margin: 10px auto 10px; /*記事中のh2はmargintopが大きい*/
+}
+
+
+.categories {
+    margin: 0;
+}
+
+
+.categories ul {
+    list-style-type: none;
+    margin: 0 20px 0 0;
+    padding: 5px 10px 5px 10px;       /*box-border-inside*/
+    background-color: var(--other-color);
+}
+
+
+.categories a {
+    color: var(--main-color);
+}
+
+
+.categories a:hover {
+    color: #b7dbf2; /*その要素にマウスポインタが重なっているときに適用される*/
+    text-decoration: none; /*aはhoverでリンクテキストの下線を表示する設定になっているため、ここだけ対象外にする*/
+}
+
+
+
+
+
+
+
+
+
+
+/* ================================================================================================== *
+ *
+ * []header []nav [○]main []footer
+ * -> general（*.html）
+ *
+ * ================================================================================================== */
+
+/* flexbox : 親要素にdisplay:flexを指定することでflex containerとなり、子要素をflex itemとして扱える 
+ */
+.general-main {
+    display: flex;
+    flex-flow: column;
+    background: var(--background-color);
+}
+
+
+@media only screen and (min-width: 768px) {
+    .general-main {
+		flex-flow: row;   /*flex itemを横並びにする*/
+    }
+
+	main {
+		flex: 1 1 auto;    /*ウインドウサイズが変わったら拡大・縮小ともに1:0の割合で変化させる*/
+    }
+
+	.sidebar {
+		flex: 0 0 300px;    /*ウインドウサイズが変わってもsidebarの幅は300pxで固定*/
+    }
+}
+
+
+/* 個別投稿ページ(single.php)のアイキャッチ画像調整
+ */
+.post-thumbnail {
+	margin: 1em 0;
+    text-align: center;
+}
+
+/* 画像をコンテナの80%に縮小、縦横比は維持 */
+.post-thumbnail img {
+    width: 80%;
+    height: auto; 
+    max-width: 100%; /* コンテナを超えないように保険 */
+    display: inline-block; 
+}
+
+
+
+
+
+
+/* ================================================================================================== *
+ *
+ * []header []nav [○]main []footer
+ * -> 404（*.html）
+ *
+ * ================================================================================================== */
+
+.page-404 {
+    padding: 40px 0 300px;       /*box-border-inside*/
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+/* ================================================================================================== *
+ *
+ * []header []nav [○]main []footer
+ * -> article（*.html）
+ *
+ * ================================================================================================== */
+
+.entry-info {
+    font-weight:  normal;
+    color: rgba(0,0,0,0.54);
+
+    /* flexbox : 親要素にdisplay:flexを指定することでflexコンテナとなり、子要素をflexアイテムとして扱える 
+     * <div class="header-inner">をflexコンテナに指定（flexアイテム：）
+     */
+    display: flex;
+
+
+    /* flexアイテムの水平方向制御：flexアイテムを均等配置（最初のアイテムは先頭に寄せて最後のアイテムは末尾に寄せる）
+     */
+    justify-content: flex-start;
+ 
+ 
+    /* flexアイテムの垂直方向制御：flexアイテムを上下中央に配置
+     */
+    align-items: center;
+}
+
+
+.entry-tag{
+    /* flexbox : 親要素にdisplay:flexを指定することでflexコンテナとなり、子要素をflexアイテムとして扱える 
+     * <div class="header-inner">をflexコンテナに指定（flexアイテム：）
+     */
+    display: flex;
+
+
+    /* flexアイテムの水平方向制御：flexアイテムを均等配置（最初のアイテムは先頭に寄せて最後のアイテムは末尾に寄せる）
+     */
+    justify-content: flex-start;
+ 
+ 
+    /* flexアイテムの垂直方向制御：flexアイテムを上下中央に配置
+     */
+    align-items: center;
+    
+    /* tag iconを時間表記からズラすため
+     */
+    margin: 0 0 0 30px;
+}
+
+
+.entry-tag-list{
+    /* flexbox : 親要素にdisplay:flexを指定することでflexコンテナとなり、子要素をflexアイテムとして扱える 
+     * <div class="header-inner">をflexコンテナに指定（flexアイテム：）
+     */
+    display: flex;
+
+
+    /* flexアイテムの水平方向制御：flexアイテムを均等配置（最初のアイテムは先頭に寄せて最後のアイテムは末尾に寄せる）
+     */
+    justify-content: flex-start;
+ 
+ 
+    /* flexアイテムの垂直方向制御：flexアイテムを上下中央に配置
+     */
+    align-items: center;
+}
+
+
+.entry-tag li{
+    font-weight:  normal;
+    color: rgba(0,0,0,0.54);
+    margin: 0 5px 0 0;
+	padding: 0;
+}
+
+
+.entry-tag li:after{
+    content: '\02022';
+    color: rgba(0,0,0,0.54);
+    margin: 0 5px;
+}
+
+
+.entry-tag a{
+    font-weight:  normal;
+    color: rgba(0,0,0,0.54);
+}
+
+
+.entry-tag ul {
+    list-style-type: none;
+    margin: 0 0 0 5px; /* tag iconとの間隔調整 */
+    padding: 0;
+}
+
+
+.pankuzu ol {
+    font-weight:  normal;
+    color: rgba(0,0,0,0.54);
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    /* flexbox : 親要素にdisplay:flexを指定することでflexコンテナとなり、子要素をflexアイテムとして扱える 
+     * <div class="header-inner">をflexコンテナに指定（flexアイテム："header-logo""hamburger"）
+     */
+    display: flex;
+
+
+    /* flexアイテムの水平方向制御：flexアイテムを均等配置（最初のアイテムは先頭に寄せて最後のアイテムは末尾に寄せる）
+     */
+    justify-content: flex-start;
+ 
+ 
+    /* flexアイテムの垂直方向制御：flexアイテムを上下中央に配置
+     */
+    align-items: center;
+}
+
+
+.pankuzu ol a{
+    font-weight:  normal;
+    color: rgba(0,0,0,0.54);
+}
+
+
+/* 
+ * パンくずリストに区切り文字「＞」を挿入 */
+.pankuzu li:after{
+    content: '\003e';
+    color: rgba(0,0,0,0.54);
+    margin: 0 5px;
+}
+
+
+
+
+
+
+
+
+
+
+/* ================================================================================================== *
+ *
+ * []header []nav [○]main []footer
+ * -> sidebar
+ *
+ * ================================================================================================== */
+.sidebar-header {
+    font-weight:  normal;
+    font-size: 1.1rem;
+    padding: 20px 0 0;       /*box-border-inside*/
+    margin: 0 auto 0;        /*box-border-outside*/
+ }
+
+.sidebar-categories{
+    list-style-type: none;
+    padding: 0 0 0 21px;       /*box-border-inside*/
+    margin: 0;        /*box-border-outside*/
+}
+
+.sidebar-archives{
+    list-style-type: none;
+    padding: 0 0 0 21px;       /*box-border-inside*/
+    margin: 0;        /*box-border-outside*/
+}
+
+
+
+
+
+
+
+
+
+/* ================================================================================================== *
+ *
+ * []header []nav [○]main []footer
+ * -> general（*.html）
+ *
+ * ================================================================================================== */
+.home-main-contact {
+    display: flex;
+    flex-flow: column;
+    background: var(--background-color);
+}
+
+.contact-p {
+    font-weight:  normal;
+    font-size: 4.5rem;
+    text-align: center;
+    padding: 20px 0 0;       /*box-border-inside*/
+    margin: 0 auto 0;        /*box-border-outside*/
+}
+
+.post-title {
+	font-size: 2.2rem;
+}
+
+
+
+
+
+
+
+/* ================================================================================================== *
+ *
+ * []header []nav []main [○]footer
+ * -> Common for all pages
+ *
+ * ================================================================================================== */
+
+/* 背景色をウィンドウ幅いっぱいに広げる
+ * .containerはmax-widthで固定されているためLayer1の要素を指定
+ */
+footer {
+    background: var(--sub-accent-color);
+}
+
+
+.footer-nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+.footer-nav li {
+	display: inline;
+	padding: 0 1rem 0 0;
+}
+
+
+.footer-nav a {
+    color: var(--other-color);
+    /* color: rgba(255,255,255,0.5); */
+	/* color: #fff; */
+    text-decoration: none;
+}
+
+
+.footer-nav a:hover {
+	opacity: 0.5;
+}
+
+
+/* .copyright p {}ではスタイルが当たらない。
+ * 子孫セレクタは.copyright classが付与されたタグ内にあるタグにしか機能しないためなので.footer-inner p {}ならスタイルが当たる。
+ */
+.copyright  {
+    color: var(--other-color);
+    /* color: rgba(255,255,255,0.5); */
+	/* color: #fff; */
+}
+
+.s{
+    margin: 0 0 0 10px;
+    height: 28px;
+    width: 12em;
+    transition: all .6s ease;
+    border-bottom:1px solid var(--sub-accent-color);
+    border-right:none;
+    border-left:none;
+    border-top:none;
+    border-radius:0px;
+    background-color: var(--background-color);
+}
+.s:focus{
+    width:16em;
+}
+
+/* .searchsubmi */
+.searchform button[type=submit] {
+    vertical-align:top;
+    width: 35px;
+    height: 30px;
+    padding: 0;
+    font-family: 'Font Awesome\ 5 Free';
+    font-size: 18px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    /* color: rgba(0,0,0,0.54); */
+    color: var(--other-color);
+}
+
+
+/* デフォルトでは検索フォームを表示 */
+.searchform {
+  display: block;
+}
+
+/* 画面幅が767px以下の場合は検索フォームを非表示に */
+@media only screen and (max-width: 767px) {
+  .searchform {
+    display: none;
+  }
+}
+
+
+
+
+
+/* ================================================================================================== *
+ *
+ * []header []nav []main []footer
+ * -> Other CSS
+ *
+ * ================================================================================================== */
+/* Rinkerカスタマイズ */
+/* ボタン色と文字色の変更 */
+div.yyi-rinker-contents ul.yyi-rinker-links li.amazonlink {
+  background: #333333;/* Amazonリンクのボタンの色 */
+}
+
+div.yyi-rinker-contents ul.yyi-rinker-links li.amazonlink a {
+  color: #C69F73;/* Amazonリンクの文字色 */
+}
+
+div.yyi-rinker-contents ul.yyi-rinker-links li.rakutenlink {
+  background: #333333;/* 楽天リンクのボタンの色 */
+}
+
+div.yyi-rinker-contents ul.yyi-rinker-links li.rakutenlink a {
+  color: #C69F73;/* 楽天リンクの文字色 */
+}
+
+div.yyi-rinker-contents ul.yyi-rinker-links li.yahoolink {
+  background: #333333;/* Yahooショッピングのボタンの色 */
+}
+
+div.yyi-rinker-contents ul.yyi-rinker-links li.yahoolink a {
+  color: #C69F73;/* Yahooショッピングの文字色 */
+}
+
+div.yyi-rinker-contents ul.yyi-rinker-links li.freelink2 {
+  background: #333333;/* 自由リンクのボタンの色 */
+}
+
+div.yyi-rinker-contents ul.yyi-rinker-links li.freelink2 a {
+  color: #C69F73;/* 自由リンクの文字色 */
+}
+
+/* 余白の調整と影の削除 */
+div.yyi-rinker-contents {
+	margin: 1.5em 0 1.5em;/* 外側上の余白を調整 */
+	border: none;/* 外側の枠線を消す */
+	box-shadow: none;/* 影を消す */
+}
+
+/* ボタンのテキストを太字にしない */
+div.yyi-rinker-contents ul.yyi-rinker-links li a {
+font-weight: normal;
+}
+
+/* サムネイル幅を120pxに */
+div.yyi-rinker-contents div.yyi-rinker-image {
+	width: 120px;
+	min-width: 100px;
+	padding: 0;
+	margin-right: 10px;
+}
+div.yyi-rinker-contents img.yyi-rinker-main-img {
+	width: auto;
+}
+div.yyi-rinker-contents ul.yyi-rinker-links {
+	margin-bottom: 0 !important;
+}
+
+/* 商品タイトルリンク色変更 */
+div.yyi-rinker-title a {
+color: #5383c3 !important;/* 通常時 */
+font-weight: normal;/* 太字にしない */
+}
+/* ホバー時 */
+div.yyi-rinker-title a:hover {
+text-decoration: underline !important;
+}

@@ -1,0 +1,14 @@
+.DS_Store
+Thumbs.db
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.log
+*.tmp
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.webp
