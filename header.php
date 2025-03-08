@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html <?php language_attributes(); ?>><!--html lang="ja"-->
+<html lang="ja">
 <head>
-    <meta charset="<?php bloginfo('charset'); ?>"><!--meta charset="utf-8"-->
-    <meta name="description" content="このサイトでは、日々の仕事や人生の考えごと、ハードウェア開発の備忘録、革靴・メガネといった暮らしの道具、そして学生時代から趣味にしているミステリ小説の感想をゆるくまとめています。">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="description" content="HTMLの勉強の備忘録を記載する。">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/images/STAR-favicon180.ico">
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/images/STAR-favicon180.png">
     <script src="https://kit.fontawesome.com/45bdc85523.js" crossorigin="anonymous"></script>
@@ -16,9 +16,17 @@
     <!-- トップページとそれ以外のページでtitle表示を切り替える -->
     <title><?php if( !is_home() ){ wp_title(' - ', true, 'right'); } ?><?php bloginfo('name'); ?></title>
     
-    <!-- jqueryとjavascriptの読み出し（function.phpに移行済み）-->
-    <?php wp_head(); ?>
+    <!-- jqueryとjavascriptの読み出し（function.phpに移行済み） -->
+    <?php 
+    wp_head();
+    ?>
 </head>
+
+
+
+
+
+
 
 
 
@@ -111,4 +119,6 @@
     }
     }
     </style>
+
 </nav>
+
