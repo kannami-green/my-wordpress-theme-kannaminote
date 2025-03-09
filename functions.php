@@ -1,37 +1,24 @@
-<?php 
-/**
- * header.phpからの移行
- * テーマが読み込まれる際に sanitize.css と styles.css が、指定したバージョン番号とともに head 内に出力される（cssファイル更新を実施したらここのバージョンを更新する→キャッシュ更新を促す）
- */
+<?php
+//スタイルのエンキュー
+//テーマが読み込まれる際に sanitize.css と styles.css が指定したバージョン番号とともに head 内に出力される（cssファイル更新後にここのバージョンを更新する→キャッシュ更新を促す）
 function mytheme_enqueue_styles() {
-    // sanitize.css を読み込む（バージョン番号を指定）
-    wp_enqueue_style( 'mytheme-sanitize', get_template_directory_uri() . '/css/sanitize.css', array(), '1.0' );
-    
-    // styles.css を読み込む（sanitize.css に依存させ、バージョン番号を指定）
-    wp_enqueue_style( 'mytheme-style', get_template_directory_uri() . '/css/styles.css', array('mytheme-sanitize'), '2.7' );
+    wp_enqueue_style( 'mytheme-sanitize', get_template_directory_uri() . '/css/sanitize.css', array(), '1.0' );  // sanitize.css を読み込む（バージョン番号を指定）
+    wp_enqueue_style( 'mytheme-style', get_template_directory_uri() . '/css/styles.css', array('mytheme-sanitize'), '2.7' );  // styles.css を読み込む（sanitize.css に依存させ、バージョン番号を指定）
 }
 add_action( 'wp_enqueue_scripts', 'mytheme_enqueue_styles' );
 
 
-/**
- * 管理画面のアイキャッチ画像投稿を使用可能にする
- */
+//管理画面のアイキャッチ画像投稿、カスタムメニュー機能を使用可能にする
 add_theme_support( 'post-thumbnails' );
-
-/**
- * 管理画面のカスタムメニュー機能を使用可能にする
- */
 add_theme_support( 'menus' );
 
-/**
- * WordPress の the_post_thumbnail() で出力されるサイズは、デフォルトでは "thumbnail" サイズ（通常 150×150 など）となるため、180×180 で表示するカスタムサイズを定義する
- */
+
+//カスタムサムネイルの定義
+//WordPress の the_post_thumbnail() で出力されるサイズは "thumbnail" サイズ（通常 150×150）となるため180×180で表示するカスタムサイズを定義する
 add_image_size('custom-thumb', 180, 180, true);
 
 
-/**
- * 動的なパンくずリストを生成する自作関数を定義
- */
+//動的なパンくずリストを生成する自作関数を定義
 function custom_breadcrumb() {
     // パンくずリストの開始タグ
     echo '<div class="pankuzu">';
@@ -44,7 +31,7 @@ function custom_breadcrumb() {
         if ( is_single() ) {
             $categories = get_the_category();
             if ( $categories ) {
-                // 最初のカテゴリを使用（必要に応じて変更可能）
+                // 最初のカテゴリを使用
                 $cat = $categories[0];
                 // カテゴリ階層を取得して出力（セパレーターは </li><li> で区切る）
                 echo '<li>' . get_category_parents( $cat, true, '</li><li>' ) . '</li>';
@@ -78,24 +65,13 @@ function custom_breadcrumb() {
 }
 
 
-/**
- * MathJax（記事への数式埋め込み）
- */
+//MathJax（記事への数式埋め込み）のエンキュー
 function mytheme_enqueue_mathjax() {
-    // MathJax の設定をインラインスクリプトとして出力（"before" を指定して MathJax ライブラリの前に出力）
     $mathjax_config = "
         window.MathJax = {
-            tex: {
-                inlineMath: [['\\\\(', '\\\\)']],
-                displayMath: [['\\\\[', '\\\\]']]
-            },
-            chtml: {
-                displayAlign: 'left'  // ディスプレイ数式を左寄せにする
-            },
-            options: {
-                ignoreHtmlClass: 'tex2jax_ignore',
-                processHtmlClass: 'tex2jax_process'
-            }
+            tex: { inlineMath: [['\\\\(', '\\\\)']], displayMath: [['\\\\[', '\\\\]']] },
+            chtml: { displayAlign: 'left' },
+            options: { ignoreHtmlClass: 'tex2jax_ignore', processHtmlClass: 'tex2jax_process' }
         };
     ";
     wp_register_script( 'mathjax', 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js', array(), null, true );
@@ -105,9 +81,7 @@ function mytheme_enqueue_mathjax() {
 add_action( 'wp_enqueue_scripts', 'mytheme_enqueue_mathjax' );
 
 
-/**
- * WordPress の管理画面から編集できる「フッターメニュー」として動的に管理する自作関数を定義
- */
+//WordPress の管理画面から編集できる「フッターメニュー」として動的に管理する自作関数を定義
 function mytheme_register_menus() {
     register_nav_menus( array(
         'footer' => __( 'Footer Menu', 'mytheme' ),
@@ -116,9 +90,7 @@ function mytheme_register_menus() {
 add_action( 'after_setup_theme', 'mytheme_register_menus' );
 
 
-/**
- * JavaScriptをエンキューする関数（header.phpから移行）
- */
+//JavaScriptをエンキューする関数
 function mytheme_enqueue_scripts() {
     wp_enqueue_script('jquery');
     wp_enqueue_script('mytheme-common', get_template_directory_uri() . '/js/hamburger-script.js', array('jquery'), '1.0', true);
