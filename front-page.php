@@ -1,9 +1,7 @@
 <?php get_header(); ?>
 
 <!-- ================================================================================================== *
-*
 * []header []nav [○]main []footer
-*
 * ================================================================================================== -->
 <!--mainは親要素を<section>として<div class="container">の子要素に設置する（sidebar等を同じ深さに設置するため）-->
 <section class="main">
@@ -104,9 +102,6 @@
                     </a>
                 </li>
 
-                <!-- 5th-BOX -->
-                <!-- none -->
-
             </ul>
         </div>
     </div>
@@ -121,11 +116,10 @@
         <main>
         <!--Layer3 (START CONTENTS)-->            
             <h1 class="post-title">最新の記事</h1>
+
+			<!-- 記事一覧 -->
             <section class="newsBlock">
-
-                <!-- 記事一覧 -->
-                <?php get_template_part('loop', 'main'); ?>
-
+				<?php get_template_part('loop', 'main'); ?>
             </section><!-- /.newsBlock -->
             
             <!-- 連絡先エリア -->
@@ -140,14 +134,12 @@
 		    	</div><!-- /.home-main-contact -->
         </main><!-- main -->
 
-
 		<!-- サイドバーエリア -->
         <aside class="sidebar">
         <?php get_sidebar('author'); ?>
         <?php get_sidebar('categories'); ?>
         <?php get_sidebar('archives'); ?>
         </aside><!-- aside -->
-
         
     </div><!-- /.container -->
 </section>
