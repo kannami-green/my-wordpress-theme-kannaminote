@@ -3,7 +3,7 @@
 //テーマが読み込まれる際に sanitize.css と styles.css が指定したバージョン番号とともに head 内に出力される（cssファイル更新後にここのバージョンを更新する→キャッシュ更新を促す）
 function mytheme_enqueue_styles() {
     wp_enqueue_style( 'mytheme-sanitize', get_template_directory_uri() . '/css/sanitize.css', array(), '1.0' );  // sanitize.css を読み込む（バージョン番号を指定）
-    wp_enqueue_style( 'mytheme-style', get_template_directory_uri() . '/css/styles.css', array('mytheme-sanitize'), '2.7' );  // styles.css を読み込む（sanitize.css に依存させ、バージョン番号を指定）
+    wp_enqueue_style( 'mytheme-style', get_template_directory_uri() . '/css/styles.css', array('mytheme-sanitize'), '2.11' );  // styles.css を読み込む（sanitize.css に依存させ、バージョン番号を指定）
 }
 add_action( 'wp_enqueue_scripts', 'mytheme_enqueue_styles' );
 
