@@ -1,27 +1,11 @@
 <?php
-//スタイルとスクリプトのエンキュー
-function mytheme_enqueue_assets() {
-    // CSSファイルの読み込み
-    wp_enqueue_style( 'mytheme-sanitize', get_template_directory_uri() . '/css/sanitize.css', array(), '1.0' );
-    wp_enqueue_style( 'mytheme-style', get_template_directory_uri() . '/css/styles.css', array('mytheme-sanitize'), '2.12' );
-
-    // MathJaxの設定と読み込み
-    $mathjax_config = "
-        window.MathJax = {
-            tex: { inlineMath: [['\\\\(', '\\\\)']], displayMath: [['\\\\[', '\\\\]']] },
-            chtml: { displayAlign: 'left' },
-            options: { ignoreHtmlClass: 'tex2jax_ignore', processHtmlClass: 'tex2jax_process' }
-        };
-    ";
-    wp_register_script( 'mathjax', 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js', array(), null, true );
-    wp_add_inline_script( 'mathjax', $mathjax_config, 'before' );
-    wp_enqueue_script( 'mathjax' );
-
-    // JavaScriptファイルの読み込み
-    wp_enqueue_script('jquery');
-    wp_enqueue_script('mytheme-common', get_template_directory_uri() . '/js/hamburger-script.js', array('jquery'), '1.0', true);
+//スタイルのエンキュー
+//テーマが読み込まれる際に sanitize.css と styles.css が指定したバージョン番号とともに head 内に出力される（cssファイル更新後にここのバージョンを更新する→キャッシュ更新を促す）
+function mytheme_enqueue_styles() {
+    wp_enqueue_style( 'mytheme-sanitize', get_template_directory_uri() . '/css/sanitize.css', array(), '1.0' );  // sanitize.css を読み込む（バージョン番号を指定）
+    wp_enqueue_style( 'mytheme-style', get_template_directory_uri() . '/css/styles.css', array('mytheme-sanitize'), '2.11' );  // styles.css を読み込む（sanitize.css に依存させ、バージョン番号を指定）
 }
-add_action( 'wp_enqueue_scripts', 'mytheme_enqueue_assets' );
+add_action( 'wp_enqueue_scripts', 'mytheme_enqueue_styles' );
 
 
 //管理画面のアイキャッチ画像投稿、カスタムメニュー機能を使用可能にする
@@ -81,6 +65,22 @@ function custom_breadcrumb() {
 }
 
 
+//MathJax（記事への数式埋め込み）のエンキュー
+function mytheme_enqueue_mathjax() {
+    $mathjax_config = "
+        window.MathJax = {
+            tex: { inlineMath: [['\\\\(', '\\\\)']], displayMath: [['\\\\[', '\\\\]']] },
+            chtml: { displayAlign: 'left' },
+            options: { ignoreHtmlClass: 'tex2jax_ignore', processHtmlClass: 'tex2jax_process' }
+        };
+    ";
+    wp_register_script( 'mathjax', 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js', array(), null, true );
+    wp_add_inline_script( 'mathjax', $mathjax_config, 'before' );
+    wp_enqueue_script( 'mathjax' );
+}
+add_action( 'wp_enqueue_scripts', 'mytheme_enqueue_mathjax' );
+
+
 //WordPress の管理画面から編集できる「フッターメニュー」として動的に管理する自作関数を定義
 function mytheme_register_menus() {
     register_nav_menus( array(
@@ -88,4 +88,12 @@ function mytheme_register_menus() {
     ) );
 }
 add_action( 'after_setup_theme', 'mytheme_register_menus' );
+
+
+//JavaScriptをエンキューする関数
+function mytheme_enqueue_scripts() {
+    wp_enqueue_script('jquery');
+    wp_enqueue_script('mytheme-common', get_template_directory_uri() . '/js/hamburger-script.js', array('jquery'), '1.0', true);
+}
+add_action('wp_enqueue_scripts', 'mytheme_enqueue_scripts');
 
