@@ -138,7 +138,9 @@
         <aside class="sidebar">
         <?php get_sidebar('author'); ?>
         <?php get_sidebar('categories'); ?>
-        <!-- <?php get_sidebar('archives'); ?> -->
+        <?
+            //php get_sidebar('archives');
+        ?>
         </aside><!-- aside -->
         
     </div><!-- /.container -->
