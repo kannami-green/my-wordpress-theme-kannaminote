@@ -3,7 +3,7 @@
 //テーマが読み込まれる際に sanitize.css と styles.css が指定したバージョン番号とともに head 内に出力される（cssファイル更新後にここのバージョンを更新する→キャッシュ更新を促す）
 function mytheme_enqueue_styles() {
     wp_enqueue_style( 'mytheme-sanitize', get_template_directory_uri() . '/css/sanitize.css', array(), '1.0' );  // sanitize.css を読み込む（バージョン番号を指定）
-    wp_enqueue_style( 'mytheme-style', get_template_directory_uri() . '/css/styles.css', array('mytheme-sanitize'), '2.12' );  // styles.css を読み込む（sanitize.css に依存させ、バージョン番号を指定）
+    wp_enqueue_style( 'mytheme-style', get_template_directory_uri() . '/css/styles.css', array('mytheme-sanitize'), '2.13' );  // styles.css を読み込む（sanitize.css に依存させ、バージョン番号を指定）
 }
 add_action( 'wp_enqueue_scripts', 'mytheme_enqueue_styles' );
 
@@ -34,7 +34,13 @@ function custom_breadcrumb() {
                 // 最初のカテゴリを使用
                 $cat = $categories[0];
                 // カテゴリ階層を取得して出力（セパレーターは </li><li> で区切る）
-                echo '<li>' . get_category_parents( $cat, true, '</li><li>' ) . '</li>';
+                $cat_parents = get_category_parents($cat, true, '</li><li>');
+                // もし$cat_parentsが正常取得できた場合のみ末尾処理
+                if ( $cat_parents && ! is_wp_error($cat_parents) ) {
+                    // 末尾の "</li><li>" を削除
+                    $cat_parents = rtrim($cat_parents, "</li><li>");
+                    echo '<li>' . $cat_parents . '</li>';
+                }
             }
             // 最後に投稿タイトル
             echo '<li>' . get_the_title() . '</li>';

@@ -650,6 +650,7 @@ nav {
     margin: 0;
     padding: 0;
     display: flex;  /*flexコンテナ化（子要素をflexアイテムとして扱える）*/
+    flex-wrap: wrap;  /* 幅が足りない時に折り返し */
     justify-content: flex-start;  /*flexアイテムの水平方向制御（flexアイテムを均等配置）*/
     align-items: center;  /*flexアイテムの垂直方向制御*/
 }
@@ -658,11 +659,22 @@ nav {
     color: rgba(0, 0, 0, 0.54);
 }
 
+.pankuzu li {
+    display: inline-flex;  /* li自身をインライン風に扱う */
+    align-items: center;   /* アイコンや文字を上下中央に揃える場合 */
+    /*white-space: nowrap;*/   /* 単語途中での折り返しを防ぐ (必要に応じて) */
+    margin-right: 0.5em;
+}
+
 /*パンくずリストに区切り文字「＞」を挿入*/
 .pankuzu li:after {
     content: '\003e';
     color: rgba(0, 0, 0, 0.54);
     margin: 0 5px;
+}
+
+.pankuzu li:last-child::after {
+    content: none;
 }
 
 
