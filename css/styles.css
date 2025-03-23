@@ -966,6 +966,14 @@ div.yyi-rinker-title a:hover {
         height: auto !important;
         opacity: 0 !important;  /* 常に非表示 */
         transform: none !important;
-	}
+    }
+
+    /* モバイル向けにh1とh2だけ10%小さくする */
+    h1 {
+        font-size: 2.06rem; /* 2.57remの80%相当 */
+    }
+    h2 {
+        font-size: 1.54rem; /* 1.71remの90%相当 */
+    }
 }
 
