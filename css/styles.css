@@ -112,10 +112,10 @@ a:hover img {    /*ホバー時の透明度変更*/
  * Reference（https://inventwithpython.com/blog/2018/10/22/a-curriculum-for-python-packaging/）
  *  - html{font-size:14px}, h1{63px(4.5rem@14px)}, h2{36px(2.571rem@14px)}, h3{30px(2.143rem@14px)}, h4{24px(1.714rem@14px)}
  */
-h1 {
+h1.post-title {
     font-weight:  normal;
-    font-size: 2.57rem;  /*html{font-size:15px} -> 15px * 2.57 ≒ 38.55px*/
-    padding: 20px 0 0;
+    font-size: 2.0rem;  /*html{font-size:15px} -> 15px * 2.0 ≒ 30.0px*/
+    padding: 15px 0 10px;
     margin: 0 auto 0;
     color: rgba(0, 0, 0, 0.54);
 }
@@ -661,6 +661,8 @@ nav {
 
 .pankuzu li {
     display: inline-flex;  /* li自身をインライン風に扱う */
+    flex: 0 1 auto;
+    min-width: 0;
     align-items: center;   /* アイコンや文字を上下中央に揃える場合 */
     /*white-space: nowrap;*/   /* 単語途中での折り返しを防ぐ (必要に応じて) */
     margin-right: 0.5em;
@@ -671,6 +673,24 @@ nav {
     content: '\003e';
     color: rgba(0, 0, 0, 0.54);
     margin: 0 5px;
+}
+
+/* パンくずリストの最後の項目（投稿タイトル）だけ、折り返しを許可する */
+.pankuzu li:last-child {
+    white-space: normal;
+    overflow-wrap: break-word; /* 単語途中での改行を許可 */
+    word-break: break-all; /* アルファベットなどの連続文字列であっても、強制的に改行 */
+    flex: 1 1 auto;
+    min-width: 0;  /* Flexboxの幅制約を解除 */
+}
+
+/* タイトル全体が <a> タグで囲まれている場合は、a にも同様指定 */
+.pankuzu li:last-child a {
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-all;
+    min-width: 0;
+    flex-shrink: 1;
 }
 
 .pankuzu li:last-child::after {
@@ -981,8 +1001,8 @@ div.yyi-rinker-title a:hover {
     }
 
     /* モバイル向けにh1とh2だけ10%小さくする */
-    h1 {
-        font-size: 2.06rem; /* 2.57remの80%相当 */
+    h1.post-title {
+        font-size: 1.7rem; /* 2.0remの85%相当 */
     }
     h2 {
         font-size: 1.54rem; /* 1.71remの90%相当 */
