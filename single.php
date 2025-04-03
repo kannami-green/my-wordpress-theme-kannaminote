@@ -36,11 +36,14 @@
                     <time class="post-time" datetime="<?php the_time('Y-m-d'); ?>"><?php the_time('Y/m/d (D)'); ?></time>
                 </div>
 
+                <div class="entry-update">
+                    <i class="fa-solid fa-rotate"></i>
+                    <time class="modified-time" datetime="<?php the_modified_time('Y-m-d'); ?>"><?php the_modified_time('Y/m/d (D)'); ?></time>
+                </div>
 
-                <!-- Tag iconをとカテゴリを横並びにするため（flex）ulにもクラス名追加 -->
                 <div class="entry-tag">
-                    <i class="fas fa-tag"> </i>
-                    <?php the_category(' | '); ?>
+                    <i class="fas fa-tag"></i>
+                    <?php the_category('&nbsp;|&nbsp;'); ?>
                 </div>
             </div>
 

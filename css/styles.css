@@ -605,13 +605,17 @@ nav {
     display: flex;  /*flexコンテナ化（子要素をflexアイテムとして扱える）*/
     justify-content: flex-start;  /*flexアイテムの水平方向制御（flexアイテムを均等配置）*/
     align-items: center;  /*flexアイテムの垂直方向制御*/
+    flex-wrap: nowrap;
 }
 
+/* 各項目をインラインフレックスにして、改行しないようにする */
+.entry-time,
+.entry-update,
 .entry-tag {
-    display: flex;
-    justify-content: flex-start;
+    display: inline-flex;
     align-items: center;
-    margin-left: 30px;  /*tag iconを時間表記からズラす*/
+    white-space: nowrap;
+    margin-right: 17px;  /* 各項目間のスペース */
 }
 
 .entry-tag-list {
@@ -1006,6 +1010,11 @@ div.yyi-rinker-title a:hover {
     }
     h2 {
         font-size: 1.54rem; /* 1.71remの90%相当 */
+    }
+    
+    .entry-tag {
+        flex-basis: 100%;
+        margin-left: 0; /* 必要に応じて調整 */
     }
 }
 

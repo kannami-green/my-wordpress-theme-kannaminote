@@ -30,6 +30,13 @@
                 <h1 class="post-title"><?php the_title(); ?></h1>
             </div>
 
+            <div class="entry-info">
+                <div class="entry-update">
+                    <i class="fa-solid fa-rotate"></i>
+                    <time class="modified-time" datetime="<?php the_modified_time('Y-m-d'); ?>"><?php the_modified_time('Y/m/d (D)'); ?></time>
+                </div>
+            </div>
+
             <div class="general-main-description">
                 <?php the_content(); ?>
             </div>
